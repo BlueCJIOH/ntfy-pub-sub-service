@@ -1,6 +1,6 @@
 # ntfy-pub-sub-service
 
-This repository shows a minimal local setup of the [ntfy](https://github.com/binwiederhier/ntfy/tree/main) server and a small Python backend script that publishes a message to a topic. You can subscribe to the same topic from the official ntfy mobile app to verify push notifications.
+This repository shows a minimal local setup of the [ntfy](https://github.com/binwiederhier/ntfy/tree/main) server and a small Python backend script that publishes a message to a topic. You can subscribe to the same topic from the official ntfy mobile app or from the included Flutter client to verify the notifications.
 
 ## Services
 
@@ -12,8 +12,7 @@ The included `docker-compose.yml` defines two services that share the same Docke
 ## Prerequisites
 
 * Docker and Docker Compose installed locally.
-* A phone with the ntfy mobile app installed (available on Android and iOS).
-* The phone must be able to reach your computer on the local network (e.g. same Wi‑Fi).
+* A phone or emulator that can reach your computer on the local network (e.g. same Wi‑Fi). Install the ntfy mobile app (Android/iOS) or run the sample Flutter client provided here.
 
 ## Usage
 
@@ -25,14 +24,18 @@ The included `docker-compose.yml` defines two services that share the same Docke
 
    This launches the ntfy server. The backend container only runs when invoked explicitly.
 
-2. **Subscribe from the mobile app**
+2. **Subscribe from a client**
 
-   Open the ntfy app on your phone and add a new subscription:
+   You can use the official ntfy app or run the sample Flutter client:
 
-   * Base URL: `http://<your-computer-ip>:8080`
-   * Topic: `test-topic`
+   * **Official app** – open the ntfy app on your phone and add a new subscription:
 
-   You can find the computer's IP address with `ip addr` (Linux) or `ipconfig` (Windows). Use the address reachable from your phone's network.
+     * Base URL: `http://<your-computer-ip>:8080`
+     * Topic: `test-topic`
+
+     You can find the computer's IP address with `ip addr` (Linux) or `ipconfig` (Windows). Use the address reachable from your phone's network.
+
+   * **Flutter client** – follow [the instructions below](#flutter-sample-client) to run the app, passing the same server URL and topic.
 
 3. **Send a test notification**
 
@@ -42,7 +45,7 @@ The included `docker-compose.yml` defines two services that share the same Docke
    docker compose run --rm backend
    ```
 
-   The script posts the message `"Hello from backend!"` to the `test-topic` topic. You should see the notification in the mobile app.
+   The script posts the message `"Hello from backend!"` to the `test-topic` topic. You should see the notification in your client.
 
    To send a different message or topic:
 
@@ -90,3 +93,4 @@ A minimal Flutter app is included in the `client/` directory. It subscribes to t
 
 * Notifications are sent via plain HTTP (`http://`). This setup is intended for local testing only.
 * The ntfy service stores messages in a Docker volume named `ntfy-cache`.
+* Custom clients receive messages only while running; background push support requires integrating a platform push service or using the official ntfy app.

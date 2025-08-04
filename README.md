@@ -60,6 +60,32 @@ The included `docker-compose.yml` defines two services that share the same Docke
    docker compose down
    ```
 
+## Flutter sample client
+
+A minimal Flutter app is included in the `client/` directory. It subscribes to the same ntfy topic and shows incoming messages in a list.
+
+### Requirements
+
+* Flutter SDK installed
+* A device or emulator that can reach the ntfy server
+
+### Run the client
+
+1. Fetch dependencies:
+
+   ```bash
+   cd client
+   flutter pub get
+   ```
+
+2. Launch the app, pointing it to your ntfy server and topic:
+
+   ```bash
+   flutter run --dart-define=SERVER=http://<your-computer-ip>:8080 --dart-define=TOPIC=test-topic
+   ```
+
+   Replace `<your-computer-ip>` with the address reachable from your device. Messages published to the topic will appear in the app.
+   
 ## Notes
 
 * Notifications are sent via plain HTTP (`http://`). This setup is intended for local testing only.

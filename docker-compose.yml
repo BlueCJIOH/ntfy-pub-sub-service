@@ -1,0 +1,16 @@
+services:
+  ntfy:
+    image: binwiederhier/ntfy
+    ports:
+      - "8080:80"
+    volumes:
+      - ntfy-cache:/var/cache/ntfy
+    command: serve
+
+  backend:
+    build: ./backend
+    depends_on:
+      - ntfy
+
+volumes:
+  ntfy-cache:

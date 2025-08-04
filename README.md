@@ -85,7 +85,7 @@ A minimal Flutter app is included in the `client/` directory. It subscribes to t
    ```
 
    Replace `<your-computer-ip>` with the address reachable from your device. Messages published to the topic will appear in the app.
-
+   
 ## Notes
 
 * Notifications are sent via plain HTTP (`http://`). This setup is intended for local testing only.
